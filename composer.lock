@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5060b84349f4f2fe4b5c9de078637c02",
+    "content-hash": "b355a50faf62154ba87af8d6ba971695",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -1370,6 +1370,54 @@
             "description": "The Illuminate View package.",
             "homepage": "https://laravel.com",
             "time": "2019-06-18T22:09:06+00:00"
+        },
+        {
+            "name": "jenssegers/model",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jenssegers/model.git",
+                "reference": "eedaeedc1977bb78f69dbb1c5893d0c994958790"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jenssegers/model/zipball/eedaeedc1977bb78f69dbb1c5893d0c994958790",
+                "reference": "eedaeedc1977bb78f69dbb1c5893d0c994958790",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^5.0",
+                "illuminate/support": "^4.0|^5.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.0|^5.0",
+                "satooshi/php-coveralls": "^0.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Jenssegers\\Model\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jens Segers",
+                    "homepage": "https://jenssegers.com"
+                }
+            ],
+            "description": "An Laravel eloquent-like model class, for Laravel and other frameworks",
+            "homepage": "https://github.com/jenssegers/model",
+            "keywords": [
+                "eloquent",
+                "laravel",
+                "model"
+            ],
+            "time": "2018-07-21T14:41:19+00:00"
         },
         {
             "name": "laravel/lumen-framework",
@@ -3070,6 +3118,57 @@
         }
     ],
     "packages-dev": [
+        {
+            "name": "nikoutel/helionconfig",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nikoutel/HelionConfig.git",
+                "reference": "48da156aa68ce881dfd447c37aac726a199f5cdd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nikoutel/HelionConfig/zipball/48da156aa68ce881dfd447c37aac726a199f5cdd",
+                "reference": "48da156aa68ce881dfd447c37aac726a199f5cdd",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-libxml": "*",
+                "ext-simplexml": "*"
+            },
+            "require-dev": {
+                "nikoutel/phpdebugr": "^1.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Nikoutel\\HelionConfig\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MPL-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Nikos Koutelidis",
+                    "email": "nikoutel@gmail.com"
+                }
+            ],
+            "description": "A versatile configuration parser. Can handle multiple configuration formats.",
+            "keywords": [
+                "apache",
+                "configuration",
+                "ini",
+                "json",
+                "parser",
+                "php arrays",
+                "xml"
+            ],
+            "time": "2019-07-02T06:52:40+00:00"
+        },
         {
             "name": "nikoutel/phpdebugr",
             "version": "v1.2",
