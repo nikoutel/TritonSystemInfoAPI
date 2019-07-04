@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\System\SystemInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,8 +12,8 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
-    {
-        //
+    public function register() {
+        $namespacedConcreteSystem = 'App\System\\' . php_uname('s');
+        $this->app->bind(SystemInterface::class, $namespacedConcreteSystem);
     }
 }
