@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\System;
-
 
 class System
 {
@@ -13,6 +11,6 @@ class System
     }
 
     public function getCpu() {
-        return  $this->system->getCpu();
+        return $this->system->getCpu();
     }
 }
