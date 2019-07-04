@@ -1,4 +1,19 @@
 <?php
+/**
+ *
+ * Class CPU: Provides data for the CPU on Linux systems
+ *
+ *
+ * @package TritonSystemInfoAPI
+ * @author Nikos Koutelidis nikoutel@gmail.com
+ * @copyright 2019 Nikos Koutelidis
+ * @license http://www.mozilla.org/MPL/2.0/ Mozilla Public License Version 2.0
+ *
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
 
 namespace App\System\Linux;
 
@@ -9,6 +24,11 @@ use Symfony\Component\Process\Exception\ProcessFailedException;
 class CPU implements CPUInterface
 {
 
+    /**
+     * Returns the CPU model and the number of physical CPUs (sockets), CPU cores, and logical CPUs (threads).
+     *
+     * @return array
+     */
     public function getRoot() {
         $process = new Process(['bash', '../app/bin/cpuRoot.sh']);
         $process->run();
@@ -20,6 +40,11 @@ class CPU implements CPUInterface
         return $return;
     }
 
+    /**
+     * Returns information for the CPU.
+     *
+     * @return array
+     */
     public function getInfo() {
         $process = new Process(['lscpu']);
         $process->run();
@@ -36,6 +61,11 @@ class CPU implements CPUInterface
         return $return;
     }
 
+    /**
+     * Returns CPU loads (current and total).
+     *
+     * @return array
+     */
     public function getLoad() {
         $process = new Process(['bash', '../app/bin/cpuLoad.sh']);
         $process->run();

@@ -1,15 +1,19 @@
 <?php
-
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It is a breeze. Simply tell Lumen the URIs it should respond to
-| and give it the Closure to call when that URI is requested.
-|
-*/
+/**
+ *
+ * API routing
+ *
+ *
+ * @package TritonSystemInfoAPI
+ * @author Nikos Koutelidis nikoutel@gmail.com
+ * @copyright 2019 Nikos Koutelidis
+ * @license http://www.mozilla.org/MPL/2.0/ Mozilla Public License Version 2.0
+ *
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -51,6 +55,13 @@ $router->options('/{route:.*}/', function (Request $request) {
     return getError(405, $request);
 });
 
+/**
+ * Generates the error response according to $statusCode.
+ *
+ * @param $statusCode
+ * @param Request $request
+ * @return Response
+ */
 function getError($statusCode, Request $request) {
     $url = $request->fullUrl();
     $method = $request->getRealMethod();
