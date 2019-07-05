@@ -18,17 +18,31 @@
 namespace App\Http\Controllers;
 
 use App\CPU;
+use App\HAL;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class SystemController extends Controller
 {
+
+    /**
+     * @var HAL
+     */
+    private $hal;
+
+    /**
+     * @var Request
+     */
+    private $request;
+
     /**
      * Create a new controller instance.
      *
-     * @return void
+     * @param HAL $hal
      */
-    public function __construct() {
-        //
+    public function __construct(HAL $hal, Request $request) {
+        $this->hal = $hal;
+        $this->request = $request;
     }
 
     /**
@@ -37,6 +51,8 @@ class SystemController extends Controller
      */
     public function cpuRoot(CPU $CPU) {
         $CPU->init('getRoot');
+        $links = $this->hal->getHalLinks($this->request->getPathInfo());
+        $CPU->setAttributeArray($links);
         return (new Response($CPU))->header('Content-Type', 'application/hal+json');
     }
 
@@ -46,6 +62,8 @@ class SystemController extends Controller
      */
     public function cpuInfo(CPU $CPU) {
         $CPU->init('getInfo');
+        $links = $this->hal->getHalLinks($this->request->getPathInfo());
+        $CPU->setAttributeArray($links);
         return (new Response($CPU))->header('Content-Type', 'application/hal+json');
     }
 
@@ -55,6 +73,8 @@ class SystemController extends Controller
      */
     public function cpuLoad(CPU $CPU) {
         $CPU->init('getLoad');
+        $links = $this->hal->getHalLinks($this->request->getPathInfo());
+        $CPU->setAttributeArray($links);
         return (new Response($CPU))->header('Content-Type', 'application/hal+json');
     }
 }
