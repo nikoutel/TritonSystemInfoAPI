@@ -17,7 +17,7 @@
 
 namespace App\Http\Controllers;
 
-use App\CPU;
+use App\Models\CPU;
 use App\HAL;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;

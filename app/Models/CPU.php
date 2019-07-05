@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * Class CPU: CPU model
+ * Class CPU:  CPU model
  *
  *
  * @package TritonSystemInfoAPI
@@ -15,7 +15,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-namespace App;
+namespace App\Models;
 
 use App\System\System;
 use Jenssegers\Model\Model;
