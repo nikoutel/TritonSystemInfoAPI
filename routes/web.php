@@ -25,9 +25,7 @@ $router->get('/', function () {
 $prefix = env('API_PREFIX') ?? "";
 $router->group(['prefix' => $prefix], function () use ($router) {
 
-    $router->get('/', ['as' => 'root', function () use ($router) {
-        return $router->app->version();
-    }]);
+    $router->get('/', ['as' => 'root', 'uses' => 'SystemController@root']);
 
     $router->group(['prefix' => 'metrics'], function () use ($router) {
 
