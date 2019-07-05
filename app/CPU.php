@@ -23,6 +23,8 @@ use App\System\CPUInterface;
 
 class CPU extends Model
 {
+    use ModelTrait;
+
     /**
      * The attributes that should be casted to native types.
      *
