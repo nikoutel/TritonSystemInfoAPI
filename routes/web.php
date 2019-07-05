@@ -29,12 +29,18 @@ $router->group(['prefix' => $prefix], function () use ($router) {
         return $router->app->version();
     }]);
 
-    $router->get('cpu', 'SystemController@cpuRoot');
+    $router->group(['prefix' => 'metrics'], function () use ($router) {
 
-    $router->get('cpu/info', 'SystemController@cpuInfo');
+        $router->group(['prefix' => 'cpu'], function () use ($router) {
 
-    $router->get('cpu/load', 'SystemController@cpuLoad');
-    
+            $router->get('/', 'SystemController@cpuRoot');
+
+            $router->get('info', 'SystemController@cpuInfo');
+
+            $router->get('/load', 'SystemController@cpuLoad');
+        });
+    });
+
 });
 $router->get('/{route:.*}/', function (Request $request) {
     return getError(404, $request);
