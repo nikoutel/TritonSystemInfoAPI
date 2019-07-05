@@ -46,6 +46,8 @@ class SystemController extends Controller
     }
 
     /**
+     * Control method for the '[prefix]/metrics/cpu/' route
+     *
      * @param CPU $CPU
      * @return Response
      */
@@ -57,6 +59,8 @@ class SystemController extends Controller
     }
 
     /**
+     * Control method for the '[prefix]/metrics/cpu/info' route
+     *
      * @param CPU $CPU
      * @return Response
      */
@@ -68,6 +72,8 @@ class SystemController extends Controller
     }
 
     /**
+     * Control method for the '[prefix]/metrics/cpu/load' route
+     *
      * @param CPU $CPU
      * @return Response
      */
