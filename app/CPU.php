@@ -19,6 +19,7 @@ namespace App;
 
 use App\System\System;
 use Jenssegers\Model\Model;
+use App\System\CPUInterface;
 
 class CPU extends Model
 {
@@ -47,7 +48,7 @@ class CPU extends Model
     /**
      * Fill the models attributes with data provided by CPUInterface::getData().
      *
-     * @param array $getData
+     * @param string $getData
      */
     public function init($getData) {
         $this->fill($this->systemCPU->$getData());

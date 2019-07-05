@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * Class CPUInterface: Provides data for the CPU
+ * Interface CPUInterface: Provides data for the CPU
  *
  *
  * @package TritonSystemInfoAPI

@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * Class SystemInterface: Interface abstraction of the System Strategy
+ * Interface SystemInterface: Interface abstraction of the System Strategy
  *
  *
  * @package TritonSystemInfoAPI
