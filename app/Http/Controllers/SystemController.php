@@ -37,7 +37,7 @@ class SystemController extends Controller
      */
     public function cpuRoot(CPU $CPU) {
         $CPU->init('getRoot');
-        return new Response($CPU);
+        return (new Response($CPU))->header('Content-Type', 'application/hal+json');
     }
 
     /**
@@ -46,7 +46,7 @@ class SystemController extends Controller
      */
     public function cpuInfo(CPU $CPU) {
         $CPU->init('getInfo');
-        return new Response($CPU);
+        return (new Response($CPU))->header('Content-Type', 'application/hal+json');
     }
 
     /**
@@ -55,8 +55,7 @@ class SystemController extends Controller
      */
     public function cpuLoad(CPU $CPU) {
         $CPU->init('getLoad');
-        return new Response($CPU);
+        return (new Response($CPU))->header('Content-Type', 'application/hal+json');
     }
-
 }
 
