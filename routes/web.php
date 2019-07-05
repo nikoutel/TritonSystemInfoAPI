@@ -37,6 +37,8 @@ $router->group(['prefix' => $prefix], function () use ($router) {
 
             $router->get('/load', 'SystemController@cpuLoad');
         });
+
+        $router->get('/', 'SystemController@metricsRoot');
     });
 
 });

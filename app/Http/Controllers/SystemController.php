@@ -55,7 +55,18 @@ class SystemController extends Controller
         return (new Response($links))->header('Content-Type', 'application/hal+json');
 
     }
-    
+
+    /**
+     * Control method for the '[prefix]/metrics/' route
+     *
+     * @return Response
+     */
+    public function metricsRoot() {
+        $links = $this->hal->getHalLinks($this->request->getPathInfo());
+        return (new Response($links))->header('Content-Type', 'application/hal+json');
+
+    }
+
     /**
      * Control method for the '[prefix]/metrics/cpu/' route
      *
