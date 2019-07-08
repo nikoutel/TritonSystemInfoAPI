@@ -8,6 +8,7 @@
  * @author Nikos Koutelidis nikoutel@gmail.com
  * @copyright 2019 Nikos Koutelidis
  * @license http://www.mozilla.org/MPL/2.0/ Mozilla Public License Version 2.0
+ * @link https://github.com/nikoutel/TritonSystemInfoAPI
  *
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
