@@ -24,4 +24,9 @@ interface SystemInterface
      * @return CPUInterface
      */
     public function getCpu();
+
+    /**
+     * @return mixed
+     */
+    public function getInfo();
 }

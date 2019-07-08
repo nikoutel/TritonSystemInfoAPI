@@ -40,4 +40,14 @@ class System
     public function getCpu() {
         return $this->system->getCpu();
     }
+
+    /**
+     * Returns general system Information like OS and nodename
+     *
+     * @return mixed
+     */
+    public function getInfo() {
+        return $this->system->getInfo();
+    }
+
 }

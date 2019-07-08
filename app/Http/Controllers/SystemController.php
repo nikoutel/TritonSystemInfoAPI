@@ -19,6 +19,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CPU;
+use App\Models\System;
 use App\HAL;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -54,6 +55,20 @@ class SystemController extends Controller
     public function root() {
         $links = $this->hal->getHalLinks($this->request->getPathInfo());
         return (new Response($links))->header('Content-Type', 'application/hal+json');
+
+    }
+
+    /**
+     * Control method for the '[prefix]/info' route
+     *
+     * @param System $system
+     * @return Response
+     */
+    public function info(System $system) {
+        $system->init('getInfo');
+        $links = $this->hal->getHalLinks($this->request->getPathInfo());
+        $system->setAttributeArray($links);
+        return (new Response($system))->header('Content-Type', 'application/hal+json');
 
     }
 

@@ -42,7 +42,10 @@ $router->group(['prefix' => $prefix], function () use ($router) {
         $router->get('/', 'SystemController@metricsRoot');
     });
 
+    $router->get('info', 'SystemController@info');
+
 });
+
 $router->get('/{route:.*}/', function (Request $request) {
     return getError(404, $request);
 });
