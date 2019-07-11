@@ -29,4 +29,9 @@ interface SystemInterface
      * @return mixed
      */
     public function getInfo();
+
+    /**
+     * @return NetworkInterface
+     */
+    public function getNetwork();
 }

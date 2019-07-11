@@ -42,6 +42,13 @@ class System
     }
 
     /**
+     * @return NetworkInterface
+     */
+    public function getNetwork() {
+        return $this->system->getNetwork();
+    }
+
+    /**
      * Returns general system Information like OS and nodename
      *
      * @return mixed
