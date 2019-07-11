@@ -33,4 +33,11 @@ interface NetworkInterface
      * @return array
      */
     public function getLoad();
+
+    /**
+     * Return list with active network interfaces
+     *
+     * @return array
+     */
+    public function getInterfaces();
 }

@@ -39,6 +39,38 @@ class Network implements NetworkInterface
      * @return array
      */
     public function getLoad() {
-        return ['load'];
+        $return = array();
+        $interfaces = $this->getInterfaces();
+        foreach ($interfaces as $interface) {
+            $$interface = new Process(['bash', '../app/bin/networkLoad.sh', $interface]);
+            $$interface->start();
+        }
+
+        foreach ($interfaces as $interface) {
+            $$interface->wait();
+            if (!$$interface->isSuccessful()) {
+                throw new ProcessFailedException($$interface);
+            }
+            parse_str($$interface->getOutput(), $output);
+            $output = array_map('trim', $output);
+            $return = $return + array($interface => $output);
+        }
+        return $return;
+    }
+
+    /**
+     * Return list with active network interfaces
+     *
+     * @return array
+     */
+    public function getInterfaces() {
+        $process = new Process(['bash', '../app/bin/networkInterfaces.sh']);
+        $process->run();
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+        parse_str($process->getOutput(), $return);
+        $return = array_map('trim', $return['interface']);
+        return $return;
     }
 }

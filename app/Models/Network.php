@@ -48,4 +48,22 @@ class Network extends Model
     public function init($getData) {
         $this->fill($this->systemNetwork->$getData());
     }
+
+    /**
+     * Casts network interface array values to int before calling parent method
+     *
+     * @param string $key
+     * @param mixed $value
+     * @return Model|void
+     */
+    public function setAttribute($key, $value)
+    {
+        if(is_array($value) && key_exists('upload', $value)){
+            $value['upload'] = (int) $value['upload'];
+        }
+        if(is_array($value) && key_exists('download', $value)){
+            $value['download'] = (int) $value['download'];
+        }
+        parent::setAttribute($key, $value);
+    }
 }
