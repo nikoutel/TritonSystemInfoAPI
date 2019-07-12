@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Outputs an encoded string with general system information.
+# Outputs a query-string formatted string with general system information.
 #
 # @package TritonSystemInfoAPI
 # @author Nikos Koutelidis nikoutel@gmail.com

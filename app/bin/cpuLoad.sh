@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Outputs an encoded string with CPU loads.
+# Outputs a query-string formatted string with CPU loads.
 #
 # @package TritonSystemInfoAPI
 # @author Nikos Koutelidis nikoutel@gmail.com
