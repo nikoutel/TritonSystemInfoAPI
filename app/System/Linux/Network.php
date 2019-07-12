@@ -30,7 +30,17 @@ class Network implements NetworkInterface
      * @return array
      */
     public function getInfo() {
-        return ['info'];
+        $process = new Process(['bash', '../app/bin/networkInfo.sh']);
+        $process->run();
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+        parse_str($process->getOutput(), $return);
+        $return = array_map(function($val){
+            if (!is_array($val)) return trim($val);
+            else return array_map('trim', $val);
+        }, $return);
+        return $return;
     }
 
     /**
