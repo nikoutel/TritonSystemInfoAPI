@@ -19,6 +19,7 @@
 namespace App\System;
 
 use App\System\Linux\CPU;
+use App\System\Linux\Network;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
@@ -31,11 +32,18 @@ class Linux implements SystemInterface
     private $cpu;
 
     /**
+     * @var Network
+     */
+    private $network;
+
+    /**
      * Linux constructor.
      * @param CPU $cpu
+     * @param Network $network
      */
-    public function __construct(CPU $cpu) {
+    public function __construct(CPU $cpu, Network $network) {
         $this->cpu = $cpu;
+        $this->network = $network;
     }
 
     /**
@@ -43,6 +51,13 @@ class Linux implements SystemInterface
      */
     public function getCPU() {
         return $this->cpu;
+    }
+
+    /**
+     * @return Network
+     */
+    public function getNetwork() {
+        return $this->network;
     }
 
     /**

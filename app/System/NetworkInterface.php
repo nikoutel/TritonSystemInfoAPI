@@ -1,14 +1,13 @@
 <?php
 /**
  *
- * Interface SystemInterface: Interface abstraction of the System Strategy
+ * Interface NetworkInterface: Provides networking data
  *
  *
  * @package TritonSystemInfoAPI
  * @author Nikos Koutelidis nikoutel@gmail.com
  * @copyright 2019 Nikos Koutelidis
  * @license http://www.mozilla.org/MPL/2.0/ Mozilla Public License Version 2.0
- * @link https://github.com/nikoutel/TritonSystemInfoAPI
  *
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
@@ -18,20 +17,27 @@
 
 namespace App\System;
 
-interface SystemInterface
+
+interface NetworkInterface
 {
     /**
-     * @return CPUInterface
-     */
-    public function getCpu();
-
-    /**
-     * @return mixed
+     * Returns information for the networking interface.
+     *
+     * @return array
      */
     public function getInfo();
 
     /**
-     * @return NetworkInterface
+     * Returns networking interface loads.
+     *
+     * @return array
      */
-    public function getNetwork();
+    public function getLoad();
+
+    /**
+     * Return list with active network interfaces
+     *
+     * @return array
+     */
+    public function getInterfaces();
 }
