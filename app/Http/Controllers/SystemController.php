@@ -112,13 +112,13 @@ class SystemController extends Controller
     }
 
     /**
-     * Control method for the '[prefix]/metrics/cpu/load' route
+     * Control method for the '[prefix]/metrics/cpu/usage' route
      *
      * @param CPU $CPU
      * @return Response
      */
-    public function cpuLoad(CPU $CPU) {
-        $CPU->init('getLoad');
+    public function cpuUsage(CPU $CPU) {
+        $CPU->init('getUsage');
         $links = $this->hal->getHalLinks($this->request->getPathInfo());
         $CPU->setAttributeArray($links);
         return (new Response($CPU))->header('Content-Type', 'application/hal+json');
@@ -137,13 +137,13 @@ class SystemController extends Controller
 
 
     /**
-     * Control method for the '[prefix]/metrics/network/load' route
+     * Control method for the '[prefix]/metrics/network/usage' route
      *
      * @param Network $network
      * @return Response
      */
-    public function networkLoad(Network $network) {
-        $network->init('getLoad');
+    public function networkUsage(Network $network) {
+        $network->init('getUsage');
         $links = $this->hal->getHalLinks($this->request->getPathInfo());
         $network->setAttributeArray($links);
         return (new Response($network))->header('Content-Type', 'application/hal+json');

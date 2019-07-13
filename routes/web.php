@@ -36,7 +36,7 @@ $router->group(['prefix' => $prefix], function () use ($router) {
 
             $router->get('info', 'SystemController@cpuInfo');
 
-            $router->get('/load', 'SystemController@cpuLoad');
+            $router->get('/usage', 'SystemController@cpuUsage');
         });
 
         $router->group(['prefix' => 'network'], function () use ($router) {
@@ -45,7 +45,7 @@ $router->group(['prefix' => $prefix], function () use ($router) {
 
             $router->get('info', 'SystemController@networkInfo');
 
-            $router->get('/load', 'SystemController@networkLoad');
+            $router->get('/usage', 'SystemController@networkUsage');
         });
 
         $router->get('/', 'SystemController@metricsRoot');

@@ -44,15 +44,15 @@ class Network implements NetworkInterface
     }
 
     /**
-     * Returns networking interface loads.
+     * Returns networking interface usage.
      *
      * @return array
      */
-    public function getLoad() {
+    public function getUsage() {
         $return = array();
         $interfaces = $this->getInterfaces();
         foreach ($interfaces as $interface) {
-            $$interface = new Process(['bash', '../app/bin/networkLoad.sh', $interface]);
+            $$interface = new Process(['bash', '../app/bin/networkUsage.sh', $interface]);
             $$interface->start();
         }
 

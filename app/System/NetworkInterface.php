@@ -28,11 +28,11 @@ interface NetworkInterface
     public function getInfo();
 
     /**
-     * Returns networking interface loads.
+     * Returns networking interface usage.
      *
      * @return array
      */
-    public function getLoad();
+    public function getUsage();
 
     /**
      * Return list with active network interfaces

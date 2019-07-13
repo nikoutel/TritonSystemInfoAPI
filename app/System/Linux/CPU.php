@@ -63,12 +63,12 @@ class CPU implements CPUInterface
     }
 
     /**
-     * Returns CPU loads (current and total).
+     * Returns CPU usage (current and total).
      *
      * @return array
      */
-    public function getLoad() {
-        $process = new Process(['bash', '../app/bin/cpuLoad.sh']);
+    public function getUsage() {
+        $process = new Process(['bash', '../app/bin/cpuUsage.sh']);
         $process->run();
         if (!$process->isSuccessful()) {
             throw new ProcessFailedException($process);

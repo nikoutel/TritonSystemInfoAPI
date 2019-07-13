@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Outputs a query-string formatted string with network interface loads.
+# Outputs a query-string formatted string with network interface usage.
 #
 # @package TritonSystemInfoAPI
 # @author Nikos Koutelidis nikoutel@gmail.com

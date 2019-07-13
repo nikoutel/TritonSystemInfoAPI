@@ -35,9 +35,9 @@ interface CPUInterface
     public function getInfo();
 
     /**
-     * Returns CPU loads (current and total).
+     * Returns CPU usage (current and total).
      *
      * @return array
      */
-    public function getLoad();
+    public function getUsage();
 }
