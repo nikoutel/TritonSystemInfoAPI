@@ -34,4 +34,9 @@ interface SystemInterface
      * @return NetworkInterface
      */
     public function getNetwork();
+
+    /**
+     * @return MemoryInterface
+     */
+    public function getMemory();
 }

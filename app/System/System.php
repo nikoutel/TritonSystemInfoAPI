@@ -49,6 +49,13 @@ class System
     }
 
     /**
+     * @return MemoryInterface
+     */
+    public function getMemory() {
+        return $this->system->getMemory();
+    }
+
+    /**
      * Returns general system Information like OS and nodename
      *
      * @return mixed
