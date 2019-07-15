@@ -1,14 +1,13 @@
 <?php
 /**
  *
- * Interface SystemInterface: Interface abstraction of the System Strategy
+ * Class MemoryInterface:
  *
  *
  * @package TritonSystemInfoAPI
  * @author Nikos Koutelidis nikoutel@gmail.com
  * @copyright 2019 Nikos Koutelidis
  * @license http://www.mozilla.org/MPL/2.0/ Mozilla Public License Version 2.0
- * @link https://github.com/nikoutel/TritonSystemInfoAPI
  *
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
@@ -18,25 +17,13 @@
 
 namespace App\System;
 
-interface SystemInterface
+
+interface MemoryInterface
 {
     /**
-     * @return CPUInterface
+     * Returns Memory usage.
+     *
+     * @return array
      */
-    public function getCpu();
-
-    /**
-     * @return mixed
-     */
-    public function getInfo();
-
-    /**
-     * @return NetworkInterface
-     */
-    public function getNetwork();
-
-    /**
-     * @return MemoryInterface
-     */
-    public function getMemory();
+    public function getUsage();
 }

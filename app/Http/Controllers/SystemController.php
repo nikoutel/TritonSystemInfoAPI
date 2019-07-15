@@ -19,6 +19,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CPU;
+use App\Models\Memory;
 use App\Models\Network;
 use App\Models\System;
 use App\HAL;
@@ -160,6 +161,32 @@ class SystemController extends Controller
         $links = $this->hal->getHalLinks($this->request->getPathInfo());
         $network->setAttributeArray($links);
         return (new Response($network))->header('Content-Type', 'application/hal+json');
+    }
+
+    /**
+     * Control method for the '[prefix]/metrics/memory/' route
+     *
+     * @param Memory $memory
+     * @return Response
+     */
+    public function memoryRoot(Memory $memory) {
+        $links = $this->hal->getHalLinks($this->request->getPathInfo());
+        $memory->setAttributeArray($links);
+        return (new Response($memory))->header('Content-Type', 'application/hal+json');
+    }
+
+
+    /**
+     * Control method for the '[prefix]/metrics/memory/usage' route
+     *
+     * @param Memory $memory
+     * @return Response
+     */
+    public function memoryUsage(Memory $memory) {
+        $memory->init('getUsage');
+        $links = $this->hal->getHalLinks($this->request->getPathInfo());
+        $memory->setAttributeArray($links);
+        return (new Response($memory))->header('Content-Type', 'application/hal+json');
     }
 }
 
