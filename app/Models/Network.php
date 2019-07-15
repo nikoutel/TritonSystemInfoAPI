@@ -50,7 +50,7 @@ class Network extends Model
     }
 
     /**
-     * Casts network interface array values to int before calling parent method
+     * Casts network interface array values to float before calling parent method
      *
      * @param string $key
      * @param mixed $value
@@ -59,10 +59,10 @@ class Network extends Model
     public function setAttribute($key, $value)
     {
         if(is_array($value) && key_exists('upload', $value)){
-            $value['upload'] = (int) $value['upload'];
+            $value['upload'] = (float) $value['upload'];
         }
         if(is_array($value) && key_exists('download', $value)){
-            $value['download'] = (int) $value['download'];
+            $value['download'] = (float) $value['download'];
         }
         parent::setAttribute($key, $value);
     }
