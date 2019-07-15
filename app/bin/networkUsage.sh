@@ -12,6 +12,8 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+source ../app/bin/calc.sh
+
 interface=${1}
 waitTime=1
 
@@ -21,6 +23,8 @@ sleep ${waitTime}
 downStop=$(cat /sys/class/net/${interface}/statistics/rx_bytes)
 upStop=$(cat /sys/class/net/${interface}/statistics/tx_bytes)
 
-down=$(( ( ( $downStop - $downStart ) / 1024 ) / ${waitTime} ))
-up=$(( ( ( $upStop - $upStart ) / 1024 ) / ${waitTime} ))
-echo 'upload='${up}'&download='${down}
+down=$((  ( $downStop - $downStart )  / ${waitTime} ))
+up=$((  ( $upStop - $upStart )  / ${waitTime} ))
+
+calcScale=2
+echo 'upload='$(calc ${up} / 1024)'&download='$(calc ${down} / 1024)
