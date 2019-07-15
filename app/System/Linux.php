@@ -46,6 +46,7 @@ class Linux implements SystemInterface
      * Linux constructor.
      * @param CPU $cpu
      * @param Network $network
+     * @param Memory $memory
      */
     public function __construct(CPU $cpu, Network $network, Memory $memory) {
         $this->cpu = $cpu;
