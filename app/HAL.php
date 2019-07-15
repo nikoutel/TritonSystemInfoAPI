@@ -56,6 +56,11 @@ class HAL
         $routeWithoutPrefix = substr($route, strlen($prefix) + 1, strlen($route));
         list($routeCategory, $routeType, $routePoint) = array_pad(array_values(array_filter(explode('/', $routeWithoutPrefix))), 3, null);
 
+        $routesWithParameter  = preg_grep ('/\{([^}]+)\}/', $this->endPoints);
+        if (!empty($routesWithParameter)) {
+            $this->addDynamicRoutesFromParameters($routesWithParameter);
+        }
+
         foreach ($this->endPoints as $endPoint) {
             $endPointWithoutPrefix = substr($endPoint, strlen($prefix) + 1, strlen($endPoint));
             list($endPointCategory, $endPointType, $endPointPoint) = array_pad(array_values(array_filter(explode('/', $endPointWithoutPrefix))), 3, null);
@@ -73,4 +78,22 @@ class HAL
         return array($this->linksKey => $linksArray);
     }
 
+    /**
+     * Add dynamically routes generated from the 'allowed' env variables
+     * to the endpoints
+     *
+     * @param $routesWithParameter
+     */
+    private function addDynamicRoutesFromParameters($routesWithParameter){
+        foreach ($routesWithParameter as $routeWithParameter) {
+            preg_match('/\{([^}]+)\}/', $routeWithParameter, $param);
+            $allowedArray = explode(',', env('ALLOWED_'.strtoupper($param[1])));
+            if (!empty($allowedArray) && (!empty($allowedArray[0]))) {
+                foreach ($allowedArray as $allowedValue) {
+                    $this->endPoints[] = str_replace($param[0], $allowedValue, $routeWithParameter);
+                }
+            }
+            $this->endPoints = array_diff($this->endPoints, array($routeWithParameter));
+        }
+    }
 }
