@@ -50,4 +50,14 @@ class Service implements ServiceInterface
     public function getLoad() {
         return ['info' => 'N/A'];
     }
+
+    /**
+     * Info data return only from overriding methods for
+     * requested services
+     *
+     * @return array
+     */
+    public function getInfo() {
+        return ['info' => 'N/A'];
+    }
 }

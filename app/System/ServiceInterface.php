@@ -35,4 +35,12 @@ interface ServiceInterface
      * @return array
      */
     public function getLoad();
+
+    /**
+     * Returns the info of requested service
+     * if applicable
+     *
+     * @return array
+     */
+    public function getInfo();
 }

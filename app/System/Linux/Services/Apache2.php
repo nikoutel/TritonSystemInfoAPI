@@ -47,6 +47,22 @@ class Apache2 extends Service implements ServiceInterface
     }
 
     /**
+     * Returns Apache serve related info
+     *
+     * @return array
+     * @throws \ReflectionException
+     */
+    public function getInfo() {
+        $keepKeys = ['ServerVersion', 'ServerMPM', 'Server Built', 'CurrentTime', 'RestartTime', 'ServerUptime',];
+        $return = array_filter($this->getModStatus(), function ($key) use ($keepKeys) {
+            return in_array($key, $keepKeys);
+        }, ARRAY_FILTER_USE_KEY);
+        return $return;
+
+    }
+
+
+    /**
      * Returns information and current statistics
      * provided by the 'mod_status' apache module
      *
