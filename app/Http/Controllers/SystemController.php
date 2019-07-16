@@ -230,5 +230,19 @@ class SystemController extends Controller
         $service->setAttributeArray($links);
         return (new Response($service))->header('Content-Type', 'application/hal+json');
     }
+
+    /**
+     * Control method for the '[prefix]/services/info' route
+     *
+     * @param Service $service
+     * @param $services
+     * @return Response
+     */
+    public function servicesInfo(Service $service, $services) {
+        $service->init('getInfo', $services);
+        $links = $this->hal->getHalLinks($this->request->getPathInfo());
+        $service->setAttributeArray($links);
+        return (new Response($service))->header('Content-Type', 'application/hal+json');
+    }
 }
 

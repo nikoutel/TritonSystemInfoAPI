@@ -74,6 +74,8 @@ $router->group(['prefix' => $prefix], function () use ($router) {
 
         $router->get('/{services}/load', 'SystemController@servicesLoad');
 
+        $router->get('/{services}/info', 'SystemController@servicesInfo');
+
     });
 
     $router->get('info', 'SystemController@info');
