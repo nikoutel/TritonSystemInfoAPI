@@ -58,6 +58,22 @@ $router->group(['prefix' => $prefix], function () use ($router) {
         $router->get('/', 'SystemController@metricsRoot');
     });
 
+    $router->group(['prefix' => 'services'], function () use ($router) {
+
+        $router->get('/', 'SystemController@servicesRoot');
+
+        $list = str_replace(',', '|', env('ALLOWED_SERVICES'));
+
+        $router->get("/{services:(?!(?:$list).*$).+}", function (Request $request) {
+            return getError(404, $request);
+        });
+
+        $router->get('/{services}', 'SystemController@servicesRoot');
+
+        $router->get('/{services}/status', 'SystemController@servicesStatus');
+
+    });
+
     $router->get('info', 'SystemController@info');
 
 });
