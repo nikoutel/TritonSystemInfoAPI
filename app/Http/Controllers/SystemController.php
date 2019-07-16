@@ -21,6 +21,7 @@ namespace App\Http\Controllers;
 use App\Models\CPU;
 use App\Models\Memory;
 use App\Models\Network;
+use App\Models\Service;
 use App\Models\System;
 use App\HAL;
 use Illuminate\Http\Request;
@@ -187,6 +188,33 @@ class SystemController extends Controller
         $links = $this->hal->getHalLinks($this->request->getPathInfo());
         $memory->setAttributeArray($links);
         return (new Response($memory))->header('Content-Type', 'application/hal+json');
+    }
+
+    /**
+     * Control method for the '[prefix]/services' route
+     *
+     * @param Service $service
+     * @return Response
+     */
+    public function servicesRoot(Service $service) {
+        $links = $this->hal->getHalLinks($this->request->getPathInfo());
+        $service->setAttributeArray($links);
+        return (new Response($service))->header('Content-Type', 'application/hal+json');
+    }
+
+    /**
+     * Control method for the '[prefix]/services/status' route
+     *
+     * @param Service $service
+     * @param $services
+     * @return Response
+     */
+    public function servicesStatus(Service $service, $services) {
+
+        $service->init('getStatus', $services);
+        $links = $this->hal->getHalLinks($this->request->getPathInfo());
+        $service->setAttributeArray($links);
+        return (new Response($service))->header('Content-Type', 'application/hal+json');
     }
 }
 
