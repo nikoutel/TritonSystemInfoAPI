@@ -41,4 +41,13 @@ class Service implements ServiceInterface
         return $return;
     }
 
+    /**
+     * Load data return only from overriding methods for
+     * requested services
+     *
+     * @return array
+     */
+    public function getLoad() {
+        return ['info' => 'N/A'];
+    }
 }

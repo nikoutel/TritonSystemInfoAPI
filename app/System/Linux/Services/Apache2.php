@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * Class Apache2:
+ * Class Apache2: Provides data for the apache2 service
  *
  *
  * @package TritonSystemInfoAPI
@@ -20,10 +20,54 @@ namespace App\System\Linux\Services;
 
 use App\System\ServiceInterface;
 use App\System\Linux\Service;
+use Nikoutel\HelionConfig\HelionConfig;
+use Nikoutel\HelionConfig\ConfigType\ConfigType;
 
 class Apache2 extends Service implements ServiceInterface
 {
-    public function getStatus2() {
-        return ['active2'];
+    /**
+     * Return the Apache server load
+     *
+     * @return array
+     * @throws \ReflectionException
+     */
+    public function getLoad() {
+        $keepKeys = [
+            'Load1', 'Load5', 'Load15', 'Total Accesses', 'Total kBytes', 'Total Duration',
+            'CPUUser', 'CPUSystem', 'CPULoad', 'ReqPerSec', 'BytesPerSec', 'BytesPerReq',
+            'DurationPerReq', 'BusyWorkers', 'IdleWorkers'
+        ];
+        $return = array_filter($this->getModStatus(), function ($key) use ($keepKeys) {
+            return in_array($key, $keepKeys);
+        }, ARRAY_FILTER_USE_KEY);
+        $return = array_map(function ($item) {
+            return (float)$item;
+        }, $return);
+        return $return;
     }
+
+    /**
+     * Returns information and current statistics
+     * provided by the 'mod_status' apache module
+     *
+     * @return array
+     * @throws \ReflectionException
+     */
+    private function getModStatus() {
+        if (!in_array('mod_status', apache_get_modules())) {
+            return ['error' => "'mod_status' 'not enabled"];
+        }
+
+        $helionConfig = new HelionConfig();
+        $modStatusURI = 'http://localhost/server-status?auto';
+        $options = array(
+            'genericConf' => array(
+                'equals' => ":",
+            )
+        );
+        $configReader = $helionConfig->getConfigReader(ConfigType::CONF, $options); //@todo catch
+        $config = $configReader->getConfig($modStatusURI);
+        return $config->asArrayFlat();
+    }
+
 }

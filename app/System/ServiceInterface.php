@@ -27,4 +27,12 @@ interface ServiceInterface
      * @return array
      */
     public function getStatus($service);
+
+    /**
+     * Returns the load of requested service
+     * if applicable
+     *
+     * @return array
+     */
+    public function getLoad();
 }
