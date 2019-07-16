@@ -39,4 +39,9 @@ interface SystemInterface
      * @return MemoryInterface
      */
     public function getMemory();
+
+    /**
+     * @return ServiceInterface
+     */
+    public function getService();
 }
