@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * Class Memory:
+ * Class Memory: Provides data for the memory on Linux systems
  *
  *
  * @package TritonSystemInfoAPI

@@ -31,7 +31,8 @@ class Memory extends Model
     private $systemMemory;
 
     /**
-     * CPU constructor.
+     * Memory constructor.
+     *
      * @param array $attributes
      */
     public function __construct(array $attributes = []) {

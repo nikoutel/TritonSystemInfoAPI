@@ -28,7 +28,8 @@ class System extends Model
 
     private $system;
     /**
-     * CPU constructor.
+     * System constructor.
+     *
      * @param array $attributes
      */
     public function __construct(array $attributes = []) {

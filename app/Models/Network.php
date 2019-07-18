@@ -31,7 +31,8 @@ class Network extends Model
     private $systemNetwork;
 
     /**
-     * CPU constructor.
+     * Network constructor.
+     *
      * @param array $attributes
      */
     public function __construct(array $attributes = []) {

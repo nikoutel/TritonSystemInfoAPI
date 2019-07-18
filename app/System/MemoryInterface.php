@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * Class MemoryInterface:
+ * Interface  MemoryInterface: Provides memory data
  *
  *
  * @package TritonSystemInfoAPI

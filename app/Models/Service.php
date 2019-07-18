@@ -39,6 +39,7 @@ class Service extends Model
 
     /**
      * Service constructor.
+     *
      * @param array $attributes
      */
     public function __construct(array $attributes = []) {
