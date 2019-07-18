@@ -45,7 +45,6 @@ class Service extends Model
         parent::__construct($attributes);
         $system = app(System::class);
         $this->systemService = $system->getService();
-//        dd($this->systemService);
     }
 
 
@@ -53,9 +52,9 @@ class Service extends Model
      * Fill the models attributes with data provided by ServiceInterface::getData().
      *
      * @param string $getData
-     * @param mixed $var
+     * @param $parameter
      */
-    public function init($getData, $var) {
-        $this->fill($this->systemService->$getData($var));
+    public function init($getData, $parameter) {
+        $this->fill($this->systemService->$getData($parameter));
     }
 }

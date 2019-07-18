@@ -27,11 +27,11 @@ class Service implements ServiceInterface
     /**
      * Returns the status of requested service
      *
-     * @param string $service
+     * @param array $parameter
      * @return array
      */
-    public function getStatus($service){
-        $process = new Process(['bash', '../app/bin/serviceStatus.sh', $service]);
+    public function getStatus($parameter){
+        $process = new Process(['bash', '../app/bin/serviceStatus.sh', $parameter['services']]);
         $process->run();
         if (!$process->isSuccessful()) {
             throw new ProcessFailedException($process);
