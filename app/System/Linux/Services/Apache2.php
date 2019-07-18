@@ -74,7 +74,7 @@ class Apache2 extends Service implements ServiceInterface
             return ['error' => "'mod_status' 'not enabled"];
         }
 
-        $helionConfig = new HelionConfig();
+        $helionConfig = app(HelionConfig::class);
         $modStatusURI = 'http://localhost/server-status?auto';
         $options = array(
             'genericConf' => array(
