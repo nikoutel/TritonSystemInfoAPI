@@ -55,7 +55,7 @@ class Config
         } elseif(is_file($path)) {
             $config = $this->getConfFromFile($path, $configType, $helionOptions);
         } else {
-            throw new \RuntimeException();
+            throw new \RuntimeException("$path is unknown");
         }
         return $config;
     }
@@ -69,7 +69,7 @@ class Config
      */
     public function getConfFromFile($file, $configType, array $helionOptions=array()) {
         if (!file_exists($file)) {
-            throw new \RuntimeException();
+            throw new \RuntimeException("$file does not exist");
         }
         $helionOptions = array_merge($helionOptions, array('rootName' => $file));
         $configSrc = file_get_contents($file);
