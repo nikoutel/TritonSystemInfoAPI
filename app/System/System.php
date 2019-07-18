@@ -54,6 +54,12 @@ class System
     public function getMemory() {
         return $this->system->getMemory();
     }
+    /**
+     * @return ServiceInterface
+     */
+    public function getService() {
+        return $this->system->getService();
+    }
 
     /**
      * Returns general system Information like OS and nodename

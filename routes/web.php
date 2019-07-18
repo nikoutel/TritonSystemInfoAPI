@@ -58,6 +58,35 @@ $router->group(['prefix' => $prefix], function () use ($router) {
         $router->get('/', 'SystemController@metricsRoot');
     });
 
+    $router->group(['prefix' => 'services'], function () use ($router) {
+
+        $router->get('/', 'SystemController@servicesRoot');
+
+        $list = str_replace(',', '|', env('ALLOWED_SERVICES'));
+        $router->get("/{services:(?!(?:$list).*$).+}", function (Request $request) {
+            return getError(404, $request);
+        });
+
+        $router->get('/{services}', 'SystemController@servicesRoot');
+
+        $router->get('/{services}/status', 'SystemController@servicesStatus');
+
+        $router->get('/{services}/load', 'SystemController@servicesLoad');
+
+        $router->get('/{services}/info', 'SystemController@servicesInfo');
+
+        $router->get('/{services}/config/', 'SystemController@servicesConfigRoot');
+
+        $list = str_replace(',', '|', env('ALLOWED_CONFAPACHE2'));
+        $list .= '|' . str_replace(',', '|', env('ALLOWED_CONFMYSQL'));
+        $router->get("/{services}/config/{conf:(?!(?:$list).*$).+}", function (Request $request) {
+            return getError(404, $request);
+        });
+
+        $router->get('/{services}/config/{conf}', 'SystemController@servicesConfig');
+
+    });
+
     $router->get('info', 'SystemController@info');
 
 });

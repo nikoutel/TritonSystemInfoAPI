@@ -21,6 +21,7 @@ namespace App\System;
 use App\System\Linux\CPU;
 use App\System\Linux\Memory;
 use App\System\Linux\Network;
+use App\System\Linux\Service;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
@@ -43,15 +44,22 @@ class Linux implements SystemInterface
     private $memory;
 
     /**
+     * @var Service
+     */
+    private $service;
+
+    /**
      * Linux constructor.
      * @param CPU $cpu
      * @param Network $network
      * @param Memory $memory
+     * @param Service $service
      */
-    public function __construct(CPU $cpu, Network $network, Memory $memory) {
+    public function __construct(CPU $cpu, Network $network, Memory $memory, Service $service) {
         $this->cpu = $cpu;
         $this->network = $network;
         $this->memory = $memory;
+        $this->service = $service;
     }
 
     /**
@@ -67,11 +75,29 @@ class Linux implements SystemInterface
     public function getNetwork() {
         return $this->network;
     }
+
     /**
      * @return Memory
      */
     public function getMemory() {
         return $this->memory;
+    }
+
+    /**
+     * Return the Service object.
+     * If a child Service object for the requested service exists
+     * return this instead
+     *
+     * @return Service
+     */
+    public function getService() {
+        if (key_exists('services', app()->request->route()[2])) {
+            $childService = 'App\System\Linux\Services\\' . ucfirst(app()->request->route()[2]['services']);
+            if (class_exists($childService)) {
+                return app($childService);
+            }
+        }
+        return $this->service;
     }
 
     /**

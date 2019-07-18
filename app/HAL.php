@@ -18,7 +18,6 @@
 
 namespace App;
 
-
 class HAL
 {
 
@@ -48,9 +47,10 @@ class HAL
      * Returns an array of HAL link elements to be included along the resources for $route
      *
      * @param $route
+     * @param string $secPoint
      * @return array
      */
-    public function getHalLinks($route) {
+    public function getHalLinks($route, $secPoint = '') {
         $linksArray = array();
         $prefix = env('API_PREFIX') ?? "";
         $routeWithoutPrefix = substr($route, strlen($prefix) + 1, strlen($route));
@@ -59,6 +59,14 @@ class HAL
         $routesWithParameter  = preg_grep ('/\{([^}]+)\}/', $this->endPoints);
         if (!empty($routesWithParameter)) {
             $this->addDynamicRoutesFromParameters($routesWithParameter);
+        }
+        if (in_array($secPoint, explode(',', env('TYPES_WITH_SEC_PARAMETER')))) {
+            $routesWithParameter  = preg_grep ('/\{([^}]+)\}/', $this->endPoints);
+            if (!empty($routesWithParameter)) {
+                $this->addDynamicRoutesFromParameters($routesWithParameter, $secPoint);
+            }
+        } else {
+            $this->endPoints = preg_grep('/\{([^}]+)\}/', $this->endPoints, PREG_GREP_INVERT);// Temp ugly fix removing second parameter
         }
 
         foreach ($this->endPoints as $endPoint) {
@@ -83,11 +91,12 @@ class HAL
      * to the endpoints
      *
      * @param $routesWithParameter
+     * @param string $secPoint
      */
-    private function addDynamicRoutesFromParameters($routesWithParameter){
+    private function addDynamicRoutesFromParameters($routesWithParameter, $secPoint = ''){
         foreach ($routesWithParameter as $routeWithParameter) {
             preg_match('/\{([^}]+)\}/', $routeWithParameter, $param);
-            $allowedArray = explode(',', env('ALLOWED_'.strtoupper($param[1])));
+            $allowedArray = explode(',', env('ALLOWED_'.strtoupper($param[1]).strtoupper($secPoint)));
             if (!empty($allowedArray) && (!empty($allowedArray[0]))) {
                 foreach ($allowedArray as $allowedValue) {
                     $this->endPoints[] = str_replace($param[0], $allowedValue, $routeWithParameter);
