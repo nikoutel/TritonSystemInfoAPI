@@ -203,44 +203,76 @@ class SystemController extends Controller
     }
 
     /**
-     * Control method for the '[prefix]/services/status' route
+     * Control method for the '[prefix]/services/{services}/status' route
      *
      * @param Service $service
      * @param $services
      * @return Response
      */
     public function servicesStatus(Service $service, $services) {
-
-        $service->init('getStatus', $services);
+        $parameter['services'] = $services;
+        $service->init('getStatus', $parameter);
         $links = $this->hal->getHalLinks($this->request->getPathInfo());
         $service->setAttributeArray($links);
         return (new Response($service))->header('Content-Type', 'application/hal+json');
     }
 
     /**
-     * Control method for the '[prefix]/services/load' route
+     * Control method for the '[prefix]/services/{services}/load' route
      *
      * @param Service $service
      * @param $services
      * @return Response
      */
     public function servicesLoad(Service $service, $services) {
-        $service->init('getLoad', $services);
+        $parameter['services'] = $services;
+        $service->init('getLoad', $parameter);
         $links = $this->hal->getHalLinks($this->request->getPathInfo());
         $service->setAttributeArray($links);
         return (new Response($service))->header('Content-Type', 'application/hal+json');
     }
 
     /**
-     * Control method for the '[prefix]/services/info' route
+     * Control method for the '[prefix]/services/{services}/info' route
      *
      * @param Service $service
      * @param $services
      * @return Response
      */
     public function servicesInfo(Service $service, $services) {
-        $service->init('getInfo', $services);
+        $parameter['services'] = $services;
+        $service->init('getInfo', $parameter);
         $links = $this->hal->getHalLinks($this->request->getPathInfo());
+        $service->setAttributeArray($links);
+        return (new Response($service))->header('Content-Type', 'application/hal+json');
+    }
+
+    /**
+     * Control method for the '[prefix]/services/{services}/config' route
+     *
+     * @param Service $service
+     * @param string $services
+     * @return Response
+     */
+    public function servicesConfigRoot(Service $service, $services) {
+        $links = $this->hal->getHalLinks($this->request->getPathInfo(), $services);
+        $service->setAttributeArray($links);
+        return (new Response($service))->header('Content-Type', 'application/hal+json');
+    }
+
+    /**
+     * Control method for the '[prefix]/services/{services}/config/{conf}' route
+     *
+     * @param Service $service
+     * @param string $services
+     * @param string $conf
+     * @return Response
+     */
+    public function servicesConfig(Service $service, $services, $conf='') {
+        $parameter['services'] = $services;
+        $parameter['conf'] = $conf;
+        $service->init('getConfig', $parameter);
+        $links = $this->hal->getHalLinks($this->request->getPathInfo(), $services);
         $service->setAttributeArray($links);
         return (new Response($service))->header('Content-Type', 'application/hal+json');
     }
