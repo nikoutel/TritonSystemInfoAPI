@@ -78,6 +78,7 @@ $router->group(['prefix' => $prefix], function () use ($router) {
         $router->get('/{services}/config/', 'SystemController@servicesConfigRoot');
 
         $list = str_replace(',', '|', env('ALLOWED_CONFAPACHE2'));
+        $list .= '|' . str_replace(',', '|', env('ALLOWED_CONFMYSQL'));
         $router->get("/{services}/config/{conf:(?!(?:$list).*$).+}", function (Request $request) {
             return getError(404, $request);
         });
