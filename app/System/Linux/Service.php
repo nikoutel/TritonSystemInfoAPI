@@ -60,4 +60,15 @@ class Service implements ServiceInterface
     public function getInfo() {
         return ['info' => 'N/A'];
     }
+
+    /**
+     * Config data return only from overriding methods for
+     * requested services
+     *
+     * @param $parameter
+     * @return array
+     */
+    public function getConfig($parameter) {
+        return ['info' => 'N/A'];
+    }
 }

@@ -18,6 +18,7 @@
 namespace App\System\Linux\Services;
 
 
+use App\System\Config;
 use App\System\ServiceInterface;
 use App\System\Linux\Service;
 use Nikoutel\HelionConfig\HelionConfig;
@@ -47,7 +48,7 @@ class Apache2 extends Service implements ServiceInterface
     }
 
     /**
-     * Returns Apache serve related info
+     * Returns Apache server related info
      *
      * @return array
      * @throws \ReflectionException
@@ -61,6 +62,20 @@ class Apache2 extends Service implements ServiceInterface
 
     }
 
+    /**
+     * Returns Apache server configurations
+     *
+     * @param $parameter
+     * @return array|mixed
+     */
+    public function getConfig($parameter) {
+        $confPOSIX = preg_replace("/^[^a-zA-Z_]|[^a-zA-Z0-9]*/",'',$parameter['conf']);
+        $path = env('PATH_'.strtoupper($confPOSIX));
+        $configType=ConfigType::APACHE;
+        $config = app(Config::class);
+        $configArray = $config->getConfig($path, $configType);
+        return $configArray;
+    }
 
     /**
      * Returns information and current statistics

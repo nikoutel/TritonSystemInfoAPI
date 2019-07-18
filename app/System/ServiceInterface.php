@@ -43,4 +43,13 @@ interface ServiceInterface
      * @return array
      */
     public function getInfo();
+
+    /**
+     * Returns configuration of requested service
+     * if applicable
+     *
+     * @param $parameter
+     * @return mixed
+     */
+    public function getConfig($parameter);
 }
