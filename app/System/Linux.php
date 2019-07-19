@@ -19,6 +19,7 @@
 namespace App\System;
 
 use App\System\Linux\CPU;
+use App\System\Linux\Disk;
 use App\System\Linux\Memory;
 use App\System\Linux\Network;
 use App\System\Linux\Service;
@@ -49,17 +50,24 @@ class Linux implements SystemInterface
     private $service;
 
     /**
+     * @var Disk
+     */
+    private $disk;
+
+    /**
      * Linux constructor.
      * @param CPU $cpu
      * @param Network $network
      * @param Memory $memory
      * @param Service $service
+     * @param Disk $disk
      */
-    public function __construct(CPU $cpu, Network $network, Memory $memory, Service $service) {
+    public function __construct(CPU $cpu, Network $network, Memory $memory, Service $service, Disk $disk) {
         $this->cpu = $cpu;
         $this->network = $network;
         $this->memory = $memory;
         $this->service = $service;
+        $this->disk = $disk;
     }
 
     /**
@@ -81,6 +89,12 @@ class Linux implements SystemInterface
      */
     public function getMemory() {
         return $this->memory;
+    }
+    /**
+     * @return Disk
+     */
+    public function getDisk() {
+        return $this->disk;
     }
 
     /**
