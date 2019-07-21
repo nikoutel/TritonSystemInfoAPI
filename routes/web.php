@@ -55,6 +55,15 @@ $router->group(['prefix' => $prefix], function () use ($router) {
             $router->get('/usage', 'SystemController@memoryUsage');
         });
 
+        $router->group(['prefix' => 'disk'], function () use ($router) {
+
+            $router->get('/', 'SystemController@diskRoot');
+
+            $router->get('/info', 'SystemController@diskInfo');
+
+            $router->get('/usage', 'SystemController@diskUsage');
+        });
+
         $router->get('/', 'SystemController@metricsRoot');
     });
 

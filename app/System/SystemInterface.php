@@ -41,6 +41,11 @@ interface SystemInterface
     public function getMemory();
 
     /**
+     * @return DiskInterface
+     */
+    public function getDisk();
+
+    /**
      * @return ServiceInterface
      */
     public function getService();

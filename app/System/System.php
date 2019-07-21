@@ -54,6 +54,14 @@ class System
     public function getMemory() {
         return $this->system->getMemory();
     }
+
+    /**
+     * @return DiskInterface
+     */
+    public function getDisk() {
+        return $this->system->getDisk();
+    }
+
     /**
      * @return ServiceInterface
      */

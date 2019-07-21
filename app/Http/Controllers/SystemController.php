@@ -19,6 +19,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CPU;
+use App\Models\Disk;
 use App\Models\Memory;
 use App\Models\Network;
 use App\Models\Service;
@@ -188,6 +189,45 @@ class SystemController extends Controller
         $links = $this->hal->getHalLinks($this->request->getPathInfo());
         $memory->setAttributeArray($links);
         return (new Response($memory))->header('Content-Type', 'application/hal+json');
+    }
+
+    /**
+     * Control method for the '[prefix]/metrics/disk/' route
+     *
+     * @param Disk $disk
+     * @return Response
+     */
+    public function diskRoot(Disk $disk) {
+        $links = $this->hal->getHalLinks($this->request->getPathInfo());
+        $disk->setAttributeArray($links);
+        return (new Response($disk))->header('Content-Type', 'application/hal+json');
+    }
+
+    /**
+     * Control method for the '[prefix]/metrics/disk/info' route
+     *
+     * @param Disk $disk
+     * @return Response
+     */
+
+    public function diskInfo(Disk $disk) {
+        $disk->init('getInfo');
+        $links = $this->hal->getHalLinks($this->request->getPathInfo());
+        $disk->setAttributeArray($links);
+        return (new Response($disk))->header('Content-Type', 'application/hal+json');
+    }
+
+    /**
+     * Control method for the '[prefix]/metrics/disk/usage' route
+     *
+     * @param Disk $disk
+     * @return Response
+     */
+    public function diskUsage(Disk $disk) {
+        $disk->init('getUsage');
+        $links = $this->hal->getHalLinks($this->request->getPathInfo());
+        $disk->setAttributeArray($links);
+        return (new Response($disk))->header('Content-Type', 'application/hal+json');
     }
 
     /**
