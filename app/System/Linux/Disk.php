@@ -45,12 +45,38 @@ class Disk implements DiskInterface
         }
         return array_map(function ($value) {
             return array_filter($value, function ($value) {
-                return ($value !== null  && $value !== '');
+                return ($value !== null && $value !== '');
             });
         }, $return);
     }
 
+    /**
+     * Returns disk usage
+     *
+     * @return mixed
+     */
     public function getUsage() {
-        return ['usage'];
+        $keys = ['major_num', 'minor_num', 'name',
+            'read_io', 'read_merges', 'read_sectors', 'time_spend_reading',
+            'write_io', 'write_merges', 'write_sectors', 'time_spend_writing',
+            'io_in_progress', 'time_spend_on_io', 'time_in_queue',
+            'discards_io', 'discards_merges', 'discards_sectors', 'time_spend_discarding',
+            'avg_reads_ps', 'avg_read_size_kb', 'avg_num_read_mbs', 'per_merged_read_reqs',
+            'avg_read_response_time',
+            'avg_write_ps', 'avg_write_size_kb', 'avg_num_write_mbs', 'per_merged_write_reqs',
+            'avg_write_response_time',
+            'busy', 'avg_io_ps'
+        ];
+        $process = new Process(['bash', '../app/bin/diskUsage.sh']);
+        $process->run();
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+        parse_str($process->getOutput(), $return);
+
+        foreach ($return as $k => $a) {
+            $return[$k] = $n = array_combine($keys, $a);
+        }
+        return $return;
     }
 }
