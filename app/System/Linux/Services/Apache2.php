@@ -54,7 +54,7 @@ class Apache2 extends Service implements ServiceInterface
      * @throws \ReflectionException
      */
     public function getInfo() {
-        $keepKeys = ['ServerVersion', 'ServerMPM', 'Server Built', 'CurrentTime', 'RestartTime', 'ServerUptime',];
+        $keepKeys = ['ServerVersion', 'ServerMPM', 'Server Built', 'CurrentTime', 'RestartTime', 'ServerUptime', 'error'];
         $return = array_filter($this->getModStatus(), function ($key) use ($keepKeys) {
             return in_array($key, $keepKeys);
         }, ARRAY_FILTER_USE_KEY);
