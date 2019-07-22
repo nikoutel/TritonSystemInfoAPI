@@ -96,6 +96,27 @@ $router->group(['prefix' => $prefix], function () use ($router) {
 
     });
 
+    $router->group(['prefix' => 'software'], function () use ($router) {
+
+        $router->get('/', 'SystemController@softwareRoot');
+
+        $router->group(['prefix' => 'php'], function () use ($router) {
+
+            $router->get('/', 'SystemController@phpRoot');
+
+            $router->get('/phpinfo', 'SystemController@phpinfo');
+
+            $router->get('/config/', 'SystemController@phpConfigRoot');
+
+            $list = str_replace(',', '|', env('ALLOWED_CONF'));
+            $router->get("/config/{conf:(?!(?:$list).*$).+}", function (Request $request) {
+                return getError(404, $request);
+            });
+
+            $router->get('/config/{conf}', 'SystemController@phpConfig');
+        });
+    });
+
     $router->get('info', 'SystemController@info');
 
 });
