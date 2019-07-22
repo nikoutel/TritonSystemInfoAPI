@@ -22,7 +22,9 @@ use App\Models\CPU;
 use App\Models\Disk;
 use App\Models\Memory;
 use App\Models\Network;
+use App\Models\Php;
 use App\Models\Service;
+use App\Models\Software;
 use App\Models\System;
 use App\HAL;
 use Illuminate\Http\Request;
@@ -308,13 +310,78 @@ class SystemController extends Controller
      * @param string $conf
      * @return Response
      */
-    public function servicesConfig(Service $service, $services, $conf='') {
+    public function servicesConfig(Service $service, $services, $conf = '') {
         $parameter['services'] = $services;
         $parameter['conf'] = $conf;
         $service->init('getConfig', $parameter);
         $links = $this->hal->getHalLinks($this->request->getPathInfo(), $services);
         $service->setAttributeArray($links);
         return (new Response($service))->header('Content-Type', 'application/hal+json');
+    }
+
+
+    /**
+     * Control method for the '[prefix]/software' route
+     *
+     * @param Software $software
+     * @return Response
+     */
+    public function softwareRoot(Software $software) {
+        $links = $this->hal->getHalLinks($this->request->getPathInfo());
+        $software->setAttributeArray($links);
+        return (new Response($software))->header('Content-Type', 'application/hal+json');
+    }
+
+    /**
+     * Control method for the '[prefix]/software/php' route
+     *
+     * @param Php $software
+     * @return Response
+     */
+    public function phpRoot(Php $software) {
+        $links = $this->hal->getHalLinks($this->request->getPathInfo());
+        $software->setAttributeArray($links);
+        return (new Response($software))->header('Content-Type', 'application/hal+json');
+    }
+
+    /**
+     * Control method for the '[prefix]/software/php/phpinfo' route
+     *
+     * @param Php $software
+     * @return Response
+     */
+    public function phpinfo(Php $software) {
+        $software->init('getPhpinfo');
+        $links = $this->hal->getHalLinks($this->request->getPathInfo());
+        $software->setAttributeArray($links);
+        return (new Response($software))->header('Content-Type', 'application/hal+json');
+    }
+
+    /**
+     * Control method for the '[prefix]/software/php/config' route
+     *
+     * @param Php $software
+     * @return Response
+     */
+    public function phpConfigRoot(Php $software) {
+        $links = $this->hal->getHalLinks($this->request->getPathInfo());
+        $software->setAttributeArray($links);
+        return (new Response($software))->header('Content-Type', 'application/hal+json');
+    }
+
+    /**
+     * Control method for the '[prefix]/software/php/config/{conf}' route
+     *
+     * @param Php $software
+     * @param string $conf
+     * @return Response
+     */
+    public function phpConfig(Php $software, $conf) {
+        $parameter['conf'] = $conf;
+        $software->init('getConfig', $parameter);
+        $links = $this->hal->getHalLinks($this->request->getPathInfo());
+        $software->setAttributeArray($links);
+        return (new Response($software))->header('Content-Type', 'application/hal+json');
     }
 }
 
