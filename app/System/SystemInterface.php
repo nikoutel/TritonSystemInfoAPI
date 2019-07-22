@@ -46,6 +46,12 @@ interface SystemInterface
     public function getDisk();
 
     /**
+     * @param string $concrete
+     * @return SoftwareInterface
+     */
+    public function getSoftware($concrete);
+
+    /**
      * @return ServiceInterface
      */
     public function getService();

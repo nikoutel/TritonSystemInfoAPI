@@ -70,6 +70,14 @@ class System
     }
 
     /**
+     * @param string $concrete
+     * @return SoftwareInterface
+     */
+    public function getSoftware($concrete) {
+        return $this->system->getSoftware($concrete);
+    }
+
+    /**
      * Returns general system Information like OS and nodename
      *
      * @return mixed

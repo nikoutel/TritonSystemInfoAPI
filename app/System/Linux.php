@@ -23,6 +23,7 @@ use App\System\Linux\Disk;
 use App\System\Linux\Memory;
 use App\System\Linux\Network;
 use App\System\Linux\Service;
+use App\System\Linux\Software;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
@@ -55,6 +56,11 @@ class Linux implements SystemInterface
     private $disk;
 
     /**
+     * @var Software
+     */
+    private $software;
+
+    /**
      * Linux constructor.
      * @param CPU $cpu
      * @param Network $network
@@ -62,12 +68,13 @@ class Linux implements SystemInterface
      * @param Service $service
      * @param Disk $disk
      */
-    public function __construct(CPU $cpu, Network $network, Memory $memory, Service $service, Disk $disk) {
+    public function __construct(CPU $cpu, Network $network, Memory $memory, Service $service, Disk $disk, Software $software) {
         $this->cpu = $cpu;
         $this->network = $network;
         $this->memory = $memory;
         $this->service = $service;
         $this->disk = $disk;
+        $this->software = $software;
     }
 
     /**
@@ -112,6 +119,24 @@ class Linux implements SystemInterface
             }
         }
         return $this->service;
+    }
+
+    /**
+     * Return the Software object.
+     * If a child Software object exists
+     * return this instead
+     *
+     * @param string $concrete
+     * @return Software
+     */
+    public function getSoftware($concrete) {
+        if (!empty($concrete)) {
+            $childSoftware = 'App\System\Linux\Software\\' . ucfirst($concrete);
+            if (class_exists($childSoftware)) {
+                return app($childSoftware);
+            }
+        }
+        return $this->software;
     }
 
     /**
