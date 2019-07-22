@@ -45,7 +45,7 @@ class Handler extends ExceptionHandler
      * @return \Illuminate\Http\Response|\Illuminate\Http\JsonResponse
      */
     public function render($request, Exception $exception) {
-        if (env('APP_DEBUG')) {
+        if (!env('ERROR_AS_JSON')) {
             return parent::render($request, $exception);
         }
         $parentRender = parent::render($request, $exception);
@@ -53,10 +53,12 @@ class Handler extends ExceptionHandler
             "errors" => array(
                 "status" => $parentRender->getStatusCode(),
                 "error" => "",
-                "message" => $exception->getMessage(),
                 "timestamp" => date('c')
             )
         );
+        if (env('APP_DEBUG')) {
+            $error["errors"]["message"] = $exception->getMessage();
+        }
         return new Response($error, $parentRender->getStatusCode());
     }
 }
