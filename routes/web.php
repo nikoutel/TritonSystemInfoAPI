@@ -28,7 +28,9 @@ $router->group(['prefix' => $prefix], function () use ($router) {
 
     $router->get('/', ['as' => 'root', 'uses' => 'SystemController@root']);
 
-    $router->group(['prefix' => 'metrics'], function () use ($router) {
+    $router->group(['prefix' => 'system'], function () use ($router) {
+
+        $router->get('info', 'SystemController@systemInfo');
 
         $router->group(['prefix' => 'cpu'], function () use ($router) {
 
@@ -66,7 +68,7 @@ $router->group(['prefix' => $prefix], function () use ($router) {
             $router->get('/usage', 'SystemController@diskUsage');
         });
 
-        $router->get('/', 'SystemController@metricsRoot');
+        $router->get('/', 'SystemController@systemRoot');
     });
 
     $router->group(['prefix' => 'services'], function () use ($router) {
@@ -119,7 +121,7 @@ $router->group(['prefix' => $prefix], function () use ($router) {
         });
     });
 
-    $router->get('info', 'SystemController@info');
+
 
 });
 

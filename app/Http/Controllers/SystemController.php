@@ -66,12 +66,12 @@ class SystemController extends Controller
     }
 
     /**
-     * Control method for the '[prefix]/info' route
+     * Control method for the '[prefix]/system/info' route
      *
      * @param System $system
      * @return Response
      */
-    public function info(System $system) {
+    public function systemInfo(System $system) {
         $system->init('getInfo');
         $links = $this->hal->getHalLinks($this->request->getPathInfo());
         $system->setAttributeArray($links);
@@ -80,18 +80,18 @@ class SystemController extends Controller
     }
 
     /**
-     * Control method for the '[prefix]/metrics/' route
+     * Control method for the '[prefix]/system/' route
      *
      * @return Response
      */
-    public function metricsRoot() {
+    public function systemRoot() {
         $links = $this->hal->getHalLinks($this->request->getPathInfo());
         return (new Response($links))->header('Content-Type', 'application/hal+json');
 
     }
 
     /**
-     * Control method for the '[prefix]/metrics/cpu/' route
+     * Control method for the '[prefix]/system/cpu/' route
      *
      * @param CPU $CPU
      * @return Response
@@ -103,7 +103,7 @@ class SystemController extends Controller
     }
 
     /**
-     * Control method for the '[prefix]/metrics/cpu/info' route
+     * Control method for the '[prefix]/system/cpu/info' route
      *
      * @param CPU $CPU
      * @return Response
@@ -116,7 +116,7 @@ class SystemController extends Controller
     }
 
     /**
-     * Control method for the '[prefix]/metrics/cpu/extended-info' route
+     * Control method for the '[prefix]/system/cpu/extended-info' route
      *
      * @param CPU $CPU
      * @return Response
@@ -129,7 +129,7 @@ class SystemController extends Controller
     }
 
     /**
-     * Control method for the '[prefix]/metrics/cpu/usage' route
+     * Control method for the '[prefix]/system/cpu/usage' route
      *
      * @param CPU $CPU
      * @return Response
@@ -142,8 +142,9 @@ class SystemController extends Controller
     }
 
     /**
-     * Control method for the '[prefix]/metrics/network/' route
+     * Control method for the '[prefix]/system/network/' route
      *
+     * @param Network $network
      * @return Response
      */
     public function networkRoot(Network $network) {
@@ -154,7 +155,7 @@ class SystemController extends Controller
 
 
     /**
-     * Control method for the '[prefix]/metrics/network/usage' route
+     * Control method for the '[prefix]/system/network/usage' route
      *
      * @param Network $network
      * @return Response
@@ -167,7 +168,7 @@ class SystemController extends Controller
     }
 
     /**
-     * Control method for the '[prefix]/metrics/network/info' route
+     * Control method for the '[prefix]/system/network/info' route
      *
      * @param Network $network
      * @return Response
@@ -180,7 +181,7 @@ class SystemController extends Controller
     }
 
     /**
-     * Control method for the '[prefix]/metrics/memory/' route
+     * Control method for the '[prefix]/system/memory/' route
      *
      * @param Memory $memory
      * @return Response
@@ -193,7 +194,7 @@ class SystemController extends Controller
 
 
     /**
-     * Control method for the '[prefix]/metrics/memory/usage' route
+     * Control method for the '[prefix]/system/memory/usage' route
      *
      * @param Memory $memory
      * @return Response
@@ -206,7 +207,7 @@ class SystemController extends Controller
     }
 
     /**
-     * Control method for the '[prefix]/metrics/disk/' route
+     * Control method for the '[prefix]/system/disk/' route
      *
      * @param Disk $disk
      * @return Response
@@ -218,7 +219,7 @@ class SystemController extends Controller
     }
 
     /**
-     * Control method for the '[prefix]/metrics/disk/info' route
+     * Control method for the '[prefix]/system/disk/info' route
      *
      * @param Disk $disk
      * @return Response
@@ -232,7 +233,7 @@ class SystemController extends Controller
     }
 
     /**
-     * Control method for the '[prefix]/metrics/disk/usage' route
+     * Control method for the '[prefix]/system/disk/usage' route
      *
      * @param Disk $disk
      * @return Response
