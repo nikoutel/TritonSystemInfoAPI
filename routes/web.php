@@ -36,6 +36,8 @@ $router->group(['prefix' => $prefix], function () use ($router) {
 
             $router->get('/info', 'SystemController@cpuInfo');
 
+            $router->get('/extended-info', 'SystemController@cpuExtendedInfo');
+
             $router->get('/usage', 'SystemController@cpuUsage');
         });
 

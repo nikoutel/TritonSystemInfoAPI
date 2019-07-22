@@ -30,8 +30,8 @@ class CPU implements CPUInterface
      *
      * @return array
      */
-    public function getRoot() {
-        $process = new Process(['bash', '../app/bin/cpuRoot.sh']);
+    public function getBasicInfo() {
+        $process = new Process(['bash', '../app/bin/cpuInfo.sh']);
         $process->run();
         if (!$process->isSuccessful()) {
             throw new ProcessFailedException($process);
@@ -46,7 +46,7 @@ class CPU implements CPUInterface
      *
      * @return array
      */
-    public function getInfo() {
+    public function getExtendedInfo() {
         $process = new Process(['lscpu']);
         $process->run();
         if (!$process->isSuccessful()) {

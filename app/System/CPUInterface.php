@@ -25,14 +25,14 @@ interface CPUInterface
      *
      * @return array
      */
-    public function getRoot();
+    public function getBasicInfo();
 
     /**
      * Returns information for the CPU.
      *
      * @return array
      */
-    public function getInfo();
+    public function getExtendedInfo();
 
     /**
      * Returns CPU usage (current and total).

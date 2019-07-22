@@ -97,7 +97,6 @@ class SystemController extends Controller
      * @return Response
      */
     public function cpuRoot(CPU $CPU) {
-        $CPU->init('getRoot');
         $links = $this->hal->getHalLinks($this->request->getPathInfo());
         $CPU->setAttributeArray($links);
         return (new Response($CPU))->header('Content-Type', 'application/hal+json');
@@ -110,7 +109,20 @@ class SystemController extends Controller
      * @return Response
      */
     public function cpuInfo(CPU $CPU) {
-        $CPU->init('getInfo');
+        $CPU->init('getBasicInfo');
+        $links = $this->hal->getHalLinks($this->request->getPathInfo());
+        $CPU->setAttributeArray($links);
+        return (new Response($CPU))->header('Content-Type', 'application/hal+json');
+    }
+
+    /**
+     * Control method for the '[prefix]/metrics/cpu/extended-info' route
+     *
+     * @param CPU $CPU
+     * @return Response
+     */
+    public function cpuExtendedInfo(CPU $CPU) {
+        $CPU->init('getExtendedInfo');
         $links = $this->hal->getHalLinks($this->request->getPathInfo());
         $CPU->setAttributeArray($links);
         return (new Response($CPU))->header('Content-Type', 'application/hal+json');
