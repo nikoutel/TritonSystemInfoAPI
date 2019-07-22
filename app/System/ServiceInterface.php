@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * Interface ServiceInterface: Provides data for system services on Linux Systems
+ * Interface ServiceInterface: Provides data for system services
  *
  *
  * @package TritonSystemInfoAPI
@@ -16,7 +16,6 @@
  */
 
 namespace App\System;
-
 
 interface ServiceInterface
 {

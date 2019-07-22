@@ -53,7 +53,7 @@ class Service extends Model
      * Fill the models attributes with data provided by ServiceInterface::getData().
      *
      * @param string $getData
-     * @param $parameter
+     * @param array $parameter
      */
     public function init($getData, $parameter) {
         $this->fill($this->systemService->$getData($parameter));
