@@ -37,6 +37,10 @@ class Php extends Software
     public function getConfig($parameter) {
         $confPOSIX = preg_replace("/^[^a-zA-Z_]|[^a-zA-Z0-9]*/",'',$parameter['conf']);
         $path = env('PATH_'.strtoupper($confPOSIX));
+        if (empty($path)) {
+            $conf = $parameter['conf'];
+            throw new \RuntimeException("No path for $conf found");
+        }
         $configType=ConfigType::INI;
         $config = app(Config::class);
         $configArray = $config->getConfig($path, $configType);

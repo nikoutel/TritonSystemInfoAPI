@@ -56,12 +56,12 @@ class HAL
         $routeWithoutPrefix = substr($route, strlen($prefix) + 1, strlen($route));
         list($routeCategory, $routeType, $routePoint) = array_pad(array_values(array_filter(explode('/', $routeWithoutPrefix))), 3, null);
 
-        $routesWithParameter  = preg_grep ('/\{([^}]+)\}/', $this->endPoints);
+        $routesWithParameter = preg_grep('/\{([^}]+)\}/', $this->endPoints);
         if (!empty($routesWithParameter)) {
             $this->addDynamicRoutesFromParameters($routesWithParameter);
         }
         if (in_array($secPoint, explode(',', env('TYPES_WITH_SEC_PARAMETER')))) {
-            $routesWithParameter  = preg_grep ('/\{([^}]+)\}/', $this->endPoints);
+            $routesWithParameter = preg_grep('/\{([^}]+)\}/', $this->endPoints);
             if (!empty($routesWithParameter)) {
                 $this->addDynamicRoutesFromParameters($routesWithParameter, $secPoint);
             }
@@ -81,8 +81,10 @@ class HAL
                 $linksArray[$endPointWithoutPrefix . '/'] = array('href' => url($endPoint));
             }
         }
-        $linksArray = array('self' => $linksArray[$routeWithoutPrefix . '/']) + $linksArray;
-        unset($linksArray[$routeWithoutPrefix . '/']);
+        if (array_key_exists($routeWithoutPrefix . '/', $linksArray)) {
+            $linksArray = array('self' => $linksArray[$routeWithoutPrefix . '/']) + $linksArray;
+            unset($linksArray[$routeWithoutPrefix . '/']);
+        }
         return array($this->linksKey => $linksArray);
     }
 
@@ -93,7 +95,7 @@ class HAL
      * @param $routesWithParameter
      * @param string $secPoint
      */
-    private function addDynamicRoutesFromParameters($routesWithParameter, $secPoint = ''){
+    private function addDynamicRoutesFromParameters($routesWithParameter, $secPoint = '') {
         foreach ($routesWithParameter as $routeWithParameter) {
             preg_match('/\{([^}]+)\}/', $routeWithParameter, $param);
             $allowedArray = explode(',', env('ALLOWED_'.strtoupper($param[1]).strtoupper($secPoint)));

@@ -34,6 +34,10 @@ class Mysql extends Service implements ServiceInterface
     public function getConfig($parameter) {
         $confPOSIX = preg_replace("/^[^a-zA-Z_]|[^a-zA-Z0-9]*/",'',$parameter['conf']);
         $path = env('PATH_'.strtoupper($confPOSIX));
+        if (empty($path)) {
+            $conf = $parameter['conf'];
+            throw new \RuntimeException("No path for $conf found");
+        }
         $configType=ConfigType::CONF;
         $config = app(Config::class);
         $helionOptions = array(
