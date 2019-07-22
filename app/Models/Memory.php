@@ -26,6 +26,18 @@ class Memory extends Model
     use ModelTrait;
 
     /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'memory-total' => 'int', 'memory-free' => 'int', 'memory-available' => 'int',
+        'memory-used' => 'int', 'memory-buffers' => 'int', 'memory-cached' => 'int',
+        'swap-total' => 'int', 'swap-free' => 'int', 'swap-used' => 'int',
+        'swap-cached' => 'int', 'memory-hardware-corrupted' => 'int'
+    ];
+
+    /**
      * @var MemoryInterface;
      */
     private $systemMemory;
