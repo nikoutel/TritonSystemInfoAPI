@@ -31,6 +31,11 @@ interface SystemInterface
     public function getInfo();
 
     /**
+     * @return mixed
+     */
+    public function getLoad();
+
+    /**
      * @return NetworkInterface
      */
     public function getNetwork();

@@ -154,4 +154,20 @@ class Linux implements SystemInterface
         $return = array_map('trim', $return);
         return $return;
     }
+
+    /**
+     * Returns system load average
+     *
+     * @return array|mixed
+     */
+    public function getLoad() {
+        $process = new Process(['bash', '../app/bin/systemLoad.sh']);
+        $process->run();
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+        parse_str($process->getOutput(), $return);
+        $return = array_map('trim', $return);
+        return $return;
+    }
 }

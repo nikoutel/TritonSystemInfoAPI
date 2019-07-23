@@ -36,5 +36,5 @@ elif type lsb_release >/dev/null 2>&1; then
     release=$(lsb_release -sr)
     codename=$(lsb_release -sc)
 fi
-out=${out}"Distribution="${distro^}"&Version="${release}"&Codename="${codename}
+out=${out}"Distribution="${distro^}"&Version="${release}"&Codename="${codename}"&uptime-since="$(uptime -s)
 echo ${out}

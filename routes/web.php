@@ -31,6 +31,7 @@ $router->group(['prefix' => $prefix], function () use ($router) {
     $router->group(['prefix' => 'system'], function () use ($router) {
 
         $router->get('info', 'SystemController@systemInfo');
+        $router->get('load', 'SystemController@systemLoad');
 
         $router->group(['prefix' => 'cpu'], function () use ($router) {
             $router->get('/', 'CpuController@cpuRoot');

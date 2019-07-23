@@ -70,6 +70,19 @@ class SystemController extends Controller
         return (new Response($system))->header('Content-Type', 'application/hal+json');
 
     }
+    /**
+     * Control method for the '[prefix]/system/load' route
+     *
+     * @param System $system
+     * @return Response
+     */
+    public function systemLoad(System $system) {
+        $system->init('getLoad');
+        $links = $this->hal->getHalLinks($this->request->getPathInfo());
+        $system->setAttributeArray($links);
+        return (new Response($system))->header('Content-Type', 'application/hal+json');
+
+    }
 
     /**
      * Control method for the '[prefix]/system/' route

@@ -23,6 +23,7 @@ This will expose critical information about your system! *Use it wisely!*
 
 * System
     * Information - `/api/system/info`
+    * Load average - `/api/system/load`
     * CPU - `/api/system/cpu`
         * Info - `/api/system/cpu/info`
         * Extended info - `/api/system/cpu/extended-info`

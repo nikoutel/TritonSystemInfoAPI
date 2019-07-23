@@ -26,6 +26,16 @@ class System extends Model
 
     use ModelTrait;
 
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = ['loadavg1' => 'float','loadavg5' => 'float','loadavg15' => 'float'];
+
+    /**
+     * @var SysSystem
+     */
     private $system;
     /**
      * System constructor.

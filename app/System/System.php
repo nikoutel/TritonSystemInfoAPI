@@ -86,4 +86,13 @@ class System
         return $this->system->getInfo();
     }
 
+    /**
+     * Returns system load average
+     *
+     * @return mixed
+     */
+    public function getLoad() {
+        return $this->system->getLoad();
+    }
+
 }
