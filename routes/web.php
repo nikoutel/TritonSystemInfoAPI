@@ -33,39 +33,27 @@ $router->group(['prefix' => $prefix], function () use ($router) {
         $router->get('info', 'SystemController@systemInfo');
 
         $router->group(['prefix' => 'cpu'], function () use ($router) {
-
-            $router->get('/', 'SystemController@cpuRoot');
-
-            $router->get('/info', 'SystemController@cpuInfo');
-
-            $router->get('/extended-info', 'SystemController@cpuExtendedInfo');
-
-            $router->get('/usage', 'SystemController@cpuUsage');
+            $router->get('/', 'CpuController@cpuRoot');
+            $router->get('/info', 'CpuController@cpuInfo');
+            $router->get('/extended-info', 'CpuController@cpuExtendedInfo');
+            $router->get('/usage', 'CpuController@cpuUsage');
         });
 
         $router->group(['prefix' => 'network'], function () use ($router) {
-
-            $router->get('/', 'SystemController@networkRoot');
-
-            $router->get('/info', 'SystemController@networkInfo');
-
-            $router->get('/usage', 'SystemController@networkUsage');
+            $router->get('/', 'NetworkController@networkRoot');
+            $router->get('/info', 'NetworkController@networkInfo');
+            $router->get('/usage', 'NetworkController@networkUsage');
         });
 
         $router->group(['prefix' => 'memory'], function () use ($router) {
-
-            $router->get('/', 'SystemController@memoryRoot');
-
-            $router->get('/usage', 'SystemController@memoryUsage');
+            $router->get('/', 'MemoryController@memoryRoot');
+            $router->get('/usage', 'MemoryController@memoryUsage');
         });
 
         $router->group(['prefix' => 'disk'], function () use ($router) {
-
-            $router->get('/', 'SystemController@diskRoot');
-
-            $router->get('/info', 'SystemController@diskInfo');
-
-            $router->get('/usage', 'SystemController@diskUsage');
+            $router->get('/', 'DiskController@diskRoot');
+            $router->get('/info', 'DiskController@diskInfo');
+            $router->get('/usage', 'DiskController@diskUsage');
         });
 
         $router->get('/', 'SystemController@systemRoot');
@@ -73,56 +61,39 @@ $router->group(['prefix' => $prefix], function () use ($router) {
 
     $router->group(['prefix' => 'services'], function () use ($router) {
 
-        $router->get('/', 'SystemController@servicesRoot');
-
+        $router->get('/', 'ServiceController@servicesRoot');
         $list = str_replace(',', '|', env('ALLOWED_SERVICES'));
         $router->get("/{services:(?!(?:$list).*$).+}", function (Request $request) {
             return getError(404, $request);
         });
-
-        $router->get('/{services}', 'SystemController@servicesRoot');
-
-        $router->get('/{services}/status', 'SystemController@servicesStatus');
-
-        $router->get('/{services}/load', 'SystemController@servicesLoad');
-
-        $router->get('/{services}/info', 'SystemController@servicesInfo');
-
-        $router->get('/{services}/config/', 'SystemController@servicesConfigRoot');
-
+        $router->get('/{services}', 'ServiceController@servicesRoot');
+        $router->get('/{services}/status', 'ServiceController@servicesStatus');
+        $router->get('/{services}/load', 'ServiceController@servicesLoad');
+        $router->get('/{services}/info', 'ServiceController@servicesInfo');
+        $router->get('/{services}/config/', 'ServiceController@servicesConfigRoot');
         $list = str_replace(',', '|', env('ALLOWED_CONFAPACHE2'));
         $list .= '|' . str_replace(',', '|', env('ALLOWED_CONFMYSQL'));
         $router->get("/{services}/config/{conf:(?!(?:$list).*$).+}", function (Request $request) {
             return getError(404, $request);
         });
-
-        $router->get('/{services}/config/{conf}', 'SystemController@servicesConfig');
-
+        $router->get('/{services}/config/{conf}', 'ServiceController@servicesConfig');
     });
 
     $router->group(['prefix' => 'software'], function () use ($router) {
 
-        $router->get('/', 'SystemController@softwareRoot');
+        $router->get('/', 'SoftwareController@softwareRoot');
 
         $router->group(['prefix' => 'php'], function () use ($router) {
-
-            $router->get('/', 'SystemController@phpRoot');
-
-            $router->get('/phpinfo', 'SystemController@phpinfo');
-
-            $router->get('/config/', 'SystemController@phpConfigRoot');
-
+            $router->get('/', 'SoftwareController@phpRoot');
+            $router->get('/phpinfo', 'SoftwareController@phpinfo');
+            $router->get('/config/', 'SoftwareController@phpConfigRoot');
             $list = str_replace(',', '|', env('ALLOWED_CONF'));
             $router->get("/config/{conf:(?!(?:$list).*$).+}", function (Request $request) {
                 return getError(404, $request);
             });
-
-            $router->get('/config/{conf}', 'SystemController@phpConfig');
+            $router->get('/config/{conf}', 'SoftwareController@phpConfig');
         });
     });
-
-
-
 });
 
 $router->get('/{route:.*}/', function (Request $request) {
