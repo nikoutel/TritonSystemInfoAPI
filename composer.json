@@ -1,5 +1,7 @@
 {
     "name": "nikoutel/triton",
+    "description": "A Restful API to get the representations of system information and metrics.",
+    "keywords": ["system", "API", "REST", "HAL", "JSON", "CPU", "memory", "network", "disk", "service", "configuration", "apache"],
     "license": "MPL-2.0",
     "type": "project",
     "authors": [
@@ -26,5 +28,10 @@
         "psr-4": {
             "App\\": "app/"
         }
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ]
     }
 }
