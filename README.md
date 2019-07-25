@@ -64,10 +64,13 @@ and their configurations must be defined with the `ALLOWED_CONF{service_name}` (
 
 Configuration paths are defined via the `PATH_{conf_name}` variable (e.g. `PATH_MYCNF=/etc/mysql/my.cnf`).
 
+## Requirements ##
+
+* PHP 7.1.3 (min)
 
 ## Install ##
 
-**composer:** (recommended)   
+**composer:** 
 
 *As standalone:*
 ```
@@ -78,12 +81,6 @@ composer create-project nikoutel/tritonsysteminfoapi
 composer require nikoutel/tritonsysteminfoapi
 ```
 
-**git:**    
-
-```
-git clone https://github.com/nikoutel/TritonSystemInfoAPI.git
-```
-Use an PSR-4 compatible autoloader. 
 
 ### Configuration ###
 
