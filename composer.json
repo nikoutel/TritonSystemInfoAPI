@@ -1,5 +1,5 @@
 {
-    "name": "nikoutel/triton",
+    "name": "nikoutel/tritonsysteminfoapi",
     "description": "A Restful API to get the representations of system information and metrics.",
     "keywords": ["system", "API", "REST", "HAL", "JSON", "CPU", "memory", "network", "disk", "service", "configuration", "apache"],
     "license": "MPL-2.0",
